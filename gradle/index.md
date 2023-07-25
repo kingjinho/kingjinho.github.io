@@ -1,8 +1,8 @@
 ---
 layout: default
-title: Database
+title: Gradle
 nav_order: 5
 has_children: true
 ---
 
-database related pages
+Gradle related pages
