@@ -52,7 +52,7 @@ fun updateNumber() {
 
 ```
 
-- 하지만, 이렇게 해도 recomposition은 진행되지만, num의 숫자는 바뀌지않는다. 이유는 Composable이 recomposition 될때마다 num을 초기화
+- 이렇게 해도 recomposition은 진행되지만, num의 숫자는 바뀌지않는다. 이유는 Composable이 recomposition 될때마다 num을 초기화
   하기 때문이다.
     - 즉, 단순히 `State<T>`만 구현한 변수는 Composition에서 값을 저장하지만 recomposition에서는 값을 잊어버린다(forget).
 - 따라서 recomposition에서도 num의 값을 유지하기 위해 `remember` 키워드를 사용하여 다음과 같이 바꾸면, 우리가 예상하는대로 동작한다.
@@ -143,6 +143,9 @@ fun WaterCounter(modifier: Modifier = Modifier) {
 - 두번째는 `WellnessTask` Composable은 위에서 설명한 step을 해도 다시 보여진다.
     - 이유는 count > 0 if문이 composition 단계에서 지워졌기 때문에, count의 숫자가 다시 높아질때마다 composition단계로 들어오면서 새로 생성이 되기 때문이다.
 
+- `LazyColumn` Composable에서도 마찬가지로 화면에 보이지 않으면 Composition에서 벗어나기에 remember로 설정한 값이 있으면
+  해당 item의 업데이트 된 상태값은 초기화가 되어버린다.
+
 ## rememberSaveable
 
 - remember는 recomposition에서도 상태 값을 유지하기 위해 사용
@@ -154,8 +157,8 @@ fun WaterCounter(modifier: Modifier = Modifier) {
 ## State hoisting
 
 - Stateful, Stateless composable
-  - <span style="color:#A084E8">Stateless</span>: 상태(data)를 가지고 있지 않으며, 상태에 대한 행동이 없음
-    - 상태(data)를 가지고 있지않다?
-      - composable 함수 내부에서 선언하는 상태가 없다는 말.
-      - 즉, **parameters로 상태(data)와 상태 값 변경을 담당하는 action을 전달만 받아 그대로 UI로 보여주기만 한다는 말**
-  - <span style="color:#A084E8">Stateful</span>: 상태(data)를 가지고 있으며, 상태를 변경하는 행동도 가지고 있음
+    - <span style="color:#A084E8">Stateless</span>: 상태(data)를 가지고 있지 않으며, 상태에 대한 행동이 없음
+        - 상태(data)를 가지고 있지않다?
+            - composable 함수 내부에서 선언하는 상태가 없다는 말.
+            - 즉, **parameters로 상태(data)와 상태 값 변경을 담당하는 action을 전달만 받아 그대로 UI로 보여주기만 한다는 말**
+    - <span style="color:#A084E8">Stateful</span>: 상태(data)를 가지고 있으며, 상태를 변경하는 행동도 가지고 있음
