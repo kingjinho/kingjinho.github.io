@@ -19,6 +19,12 @@ grand_parent: Android
 - Recomposition: 상태(state, parameters) 변화에 따른 Composition의 update
     - 필요하다면, 다시 UI를 그려야 한다.
 
+## State
+- 상태라고도 불리는데
+- 시간이 지남에 따라 바뀔수있는 값이라고 생각해도 상관없고
+- 데이터라고 해도 이해하는데 큰 무리는 없다.
+- 컴퓨터 내에 저장된 파일을 수정 하면 파일이 상태가 될 수 있고, 유저의 액션에 따라 값이 바뀌는 변수도 상태의 예시가 될 수 있다
+
 ## 기존의 우리가 생각하던 mutable 변수(상태)의 변경
 
 ```kotlin
@@ -72,7 +78,7 @@ fun updateNumber() {
 ## remember 키워드?
 
 - 위 예시에서 보았듯이 recomposition에서도 상태(data) 값을 유지하기 위해 `remember` 키워드를 사용하였다.
-- `remember` 키워드는 상태(data)를 recomposition에서도 유지하기 위해 사용하는 키워드이다.
+- `remember` 키워드를 상태(data)는 initial composition에서 값을 저장하고 recomposition 상태에서 저장된 값을 리턴한다.
 - 그리고 또 한가지 `remeber` 키워드를 사용한 상태에서 알아야 할 점은
     - 호출한 composable이 composition 스텝에서 사라지면 자동으로 사라진다
 - 예시)
