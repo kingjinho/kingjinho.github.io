@@ -20,6 +20,7 @@ grand_parent: Android
     - 필요하다면, 다시 UI를 그려야 한다.
 
 ## State
+
 - 상태라고도 불리는데
 - 시간이 지남에 따라 바뀔수있는 값이라고 생각해도 상관없고
 - 데이터라고 해도 이해하는데 큰 무리는 없다.
@@ -168,3 +169,7 @@ fun WaterCounter(modifier: Modifier = Modifier) {
             - composable 함수 내부에서 선언하는 상태가 없다는 말.
             - 즉, **parameters로 상태(data)와 상태 값 변경을 담당하는 action을 전달만 받아 그대로 UI로 보여주기만 한다는 말**
     - <span style="color:#A084E8">Stateful</span>: 상태(data)를 가지고 있으며, 상태를 변경하는 행동도 가지고 있음
+- State hoisting은 UI, Business 로직에 의존
+- 기본적으로는 recomposition을 최소화 하기 위해 공통되는 최소 계층에 ui state를 둔다.
+    - 이때 계층은 ui logic에만 의존하면 composable일 수도있고, business logic도 연관이 있다면 viewmodel이 될 수도 있다.
+- 그리고 때에 따라 state가 여러 곳에서 쓰이지않다면, hoist를 안해도 상관없다.
