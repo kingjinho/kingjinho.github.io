@@ -1,6 +1,6 @@
 ---
 layout: default
-title: State (WIP)
+title: State
 parent: Compose
 nav_order: 1
 grand_parent: Android
