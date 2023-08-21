@@ -270,3 +270,28 @@ fun ColumnScope.BoxArea(
 }
 
 ```
+
+### 추가
+weight(FLOAT)를 사용 할 때 0.0f는 제외된다. 즉 위 방식대로 진행하면 두 영역 중 어느 하나의 weight가 0.0가 되면
+앱이 강제 종료되는 현상을 겪으니 다음과같이 수정해야한다.
+```kotlin
+if(playerRedHeight > MINIMUM_HEIGHT_WEIGHT) {
+            PlayerArea(
+                height = playerRedHeight,
+                player = HopScotchPlayer.Red
+            ) {
+                playerRedHeight = (playerRedHeight + 0.07f)
+                    .coerceAtMost(MAXIMUM_HEIGHT_WEIGHT)
+            }
+        }
+
+if(1.0f - playerRedHeight > MINIMUM_HEIGHT_WEIGHT) {
+    PlayerArea(
+        height = 1.0f - playerRedHeight,
+        player = HopScotchPlayer.Blue
+    ) {
+        playerRedHeight = (playerRedHeight - 0.07f)
+            .coerceAtLeast(MINIMUM_HEIGHT_WEIGHT)
+    }
+}
+```
