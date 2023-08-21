@@ -74,9 +74,11 @@ class SortableArray {
 
 ```kotlin
 
-fun sort(array: IntArray, ) {
+fun quickSort(array: IntArray, start: Int, end: Int) {
     val pivot = array.lastIndex
-    val leftIndex = partition(array, )
+    val leftIndex = partition(array, start, end)
+    partition(array, 0, leftIndex - 1)
+    partition(array, leftIndex + 1, array.lastIndex)
 }
 
 ```
