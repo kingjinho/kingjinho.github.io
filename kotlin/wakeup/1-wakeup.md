@@ -1,8 +1,9 @@
 ---
 layout: default
-title: Wake up 시리즈 - 배열, 리스트 순회
-parent: Kotlin
-nav_order: 2
+title: 시리즈1 - 배열, 리스트 순회
+parent: Wake Up
+grand_parent: Kotlin
+nav_order: 1
 ---
 
 # 배열 리스트 순회시 내가 저지른 멍청한 실수
