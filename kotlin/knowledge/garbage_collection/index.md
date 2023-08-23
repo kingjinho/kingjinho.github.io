@@ -1,8 +1,10 @@
 ---
 layout: default
 title: Garbage Collection
-parent: Kotlin
+parent: Knowledge
 nav_order: 1
+grand_parent: Kotlin
+
 ---
 
 # Garbage Collection
