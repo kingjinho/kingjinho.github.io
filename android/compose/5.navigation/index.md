@@ -24,39 +24,24 @@ grand_parent: Android
 ## 문제
 
 1. 게임이 끝나면 파란색이 이겼는지, 빨간색이 이겼는지를 popup으로 보여준다
-2. Popup composable이 나온뒤에 뒤로가기를 누르면 이전 화면이 나오지만 나중에 사라진다.
+2. Popup composable이 나온뒤에 뒤로가기를 누르면 Popup이 이전 화면에 도달하고 난 뒤에 사라진다.
 
-## 문제 코드
+## 문제 코드(수정전 코드)
 
 ```kotlin
 @Composable
-fun SomeScreen() {
-
-    if (if_condition_is_met) {
-
+fun HopScotchGameScreen() {
+    if (체크로직) {
         Popup(
             alignment = Alignment.Center,
             properties = PopupProperties(
                 focusable = false,
             )
         ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(text = "Game Over!!!!")
-                Text(text = if (playerRedHeight == MAXIMUM_HEIGHT_WEIGHT) "Red Win!!!" else "Blue Win!!!")
-                Spacer(modifier = Modifier.height(16.dp))
-                Button(onClick = {
-                    playerRedHeight = 0.5f
-                }) {
-                    Text(text = "Restart")
-                }
-            }
+            ...
         }
     }
-
 }
-
 ```
 
 ## 과거의 나에게 묻는 질문
@@ -67,14 +52,14 @@ fun SomeScreen() {
 
 - Activity
     - Theme
-        - NavHost
+        - `NavHost`
             - Screen1
             - Screen2
             - ...
 
 # 뒤로가기는 왜 동작했을까?
 
-PopupProperties의 focusable값을 false로 줘서 뒤로가기 소프트 버튼 클릭이나 제스쳐가 Screen 레벨에서 잡혔다.
+`PopupProperties의 focusable값을 false`로 줘서 뒤로가기 소프트 버튼 클릭이나 제스쳐 액션이 Screen 레벨에서 잡혔다.
 
 즉 NavHost의 BackHandler Composable로 정의된 navController.popBackStack()이 호출되었다.
 
@@ -107,26 +92,28 @@ focusable = true라는 가정하에
         - Popup composable 내부는 PopupLayout으로 이루어져있는데 팝업을 생성하는 과정에서 `setIsFocusable(Boolean)`함수 호출
         - 여기서 window의 flag 값을 업데이트 and 연산자로 업데이트
 
-[터치 이벤트 동작 정리](../6.touch-and-keyevent/index.html)
+[터치 이벤트 동작 정리 - 커밍쑨..](../6.touch-and-keyevent/index.html)
+
+[일단은 이걸로..](https://readystory.tistory.com/185)
 
 
 ## 솔루션
 
-<b>Reminder</b>: 더 나은 방법이 존재할거같은데 아직 Compose에 익숙하지 않아서 좋은 방법인지는 모르겠다.
+<b>Reminder</b>: 더 나은 방법이 존재할거같은데 아직 Compose에 익숙하지 않아서 아는 방법이 요거 말고는 없다.
 나중에 여러 개념들을 확실하게 알고 좀 더 적응이 된다면 다시 고민해봐야할 포인트로 남겨 둬야겠다.
 
 ### 결국 핵심은 Popup을 먼저 닫는 것
 
 맨 위영상에서도 볼 수 있듯이 Popup 밑에 깔려있는 게임 화면이 사라지고 난 뒤에 사라진다.
 
-`왜?`
+`왜? 나중에 닫힐까?`
 
 그 이유는 Popup Composable의 구현에 있는데, `팝업이 누구에 의해서 닫히는 지를 보면 DisposableEffect에 의해 닫히게 된다.`
 
 Side-effects에 관한 설명은 지금 내 지식선에서 설명하기는 확실히 아니기에 아래 링크를 통해 이해하는것이 조금 더 빠를것같다.
 
-간략하게 설명하면 Side-effect는 Composable 범위 밖에서 일어나는 State의 변화를 Side-effect, 또는 부수효과라고 부르는데
-기본적으로 Composable은 Side-effect의 발생을 지양해야하지만, 경우에 따라 이 Side-effect가 필요한데 그때 Side-Effect
+간략하게 설명하면 Side-effect는 Composable 범위 밖에서 일어나는 State의 변화를 Side-effect라고 부르는데
+기본적으로 Side-effect의 발생을 지양해야하지만, 경우에 따라 이 Side-effect가 필요한데 그때 Side-Effect
 API를 이용하여 작업을 진행한다.
 
 `DisposableEffect`는 side effects composable이 Composition을 떠나거나 key가 바뀐 후 회수 되어야 할 경우에 사용한다.
@@ -218,5 +205,5 @@ fun PortfolioApp() {
 }
 ```
 
-간단한 이슈인줄알고 써봐야했다가 식겁했다
+간단한 이슈인줄알고 써봐야했다가 식겁했다.
 
