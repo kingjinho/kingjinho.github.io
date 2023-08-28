@@ -26,6 +26,7 @@ parent: Data Structure
 ### 분할
 
 - 배열에서 하나를 정한 후(기준, 또는 피벗), 그 기준보다 작은 수는 왼쪽, 큰 수는 오른쪽으로 보내는 작업
+- 기준값은 단순히 비교만 하는 거지, 실제로 위치를 바꾸는건 left index와 현재 index의 값을 swap
 
 ```kotlin
 class SortableArray {
