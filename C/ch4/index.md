@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Chapter 4 - 데이터 표현방식의 이해
-nav_order: 1
+nav_order: 2
 has_parent: true
 parent: C
 ---
