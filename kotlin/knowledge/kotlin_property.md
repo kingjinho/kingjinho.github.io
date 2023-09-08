@@ -1,9 +1,11 @@
 ---
 layout: default
 title: kotlin property
-nav_order: 3
+nav_order: 2
 has_children: false
-parent: In My Own Words
+parent: Knowledge
+grand_parent: Kotlin
+
 ---
 
 # Kotlin Property(feat. java)
