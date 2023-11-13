@@ -16,6 +16,11 @@ parent: Projects
   - https://developer.android.com/jetpack/compose/text/style-paragraph#adjust-line-height
 - text gets overlapped - what is the difference between fontsize and fontsize in TextStyle?
   - https://stackoverflow.com/questions/76839583/jetpack-compose-text-fontsize-behaviour
-- 
+- Moko resources cannot import in iOS
+  - force import SharedRes
+- Moko resources does not generate resources for each
+  - 
+
+
 
 [CameraX 코드랩](https://developer.android.com/codelabs/camerax-getting-started#0)
